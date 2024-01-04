@@ -7,9 +7,9 @@ import Stories from "./Stories";
 
 const Feed = () => {
   return (
-    <div className="flex  bg-[#f2f3f7] ">
-      {/* LeftSidebar */}
-      <LeftSidebar />
+    <div className="flex h-screen bg-[#f2f3f7] ">
+      {/* LeftSidebar <LeftSidebar />*/}
+      
       <div className="mx-auto">
         {/* Stories */}
         <Stories />
@@ -19,8 +19,8 @@ const Feed = () => {
         <Posts />
       </div>
 
-      {/* RightSidebar */}
-      <RightSidebar />
+      {/* RightSidebar <RightSidebar />*/}
+      
     </div>
   );
 };

@@ -13,6 +13,7 @@ const LeftSidebar = () => {
   return (
     <div className="w-[10rem] hidden sm:block">
       <div className="flex flex-col  pt-4 sm:pt-12 pl-7">
+        
         <div className="flex items-center font-bold">
           <MdHome className="w-9 h-9" />
           <p className="ml-2">Home</p>

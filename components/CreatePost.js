@@ -105,7 +105,8 @@ const CreatePost = () => {
         border-b mb-4 mt-2"
         ></div>
         <div className="flex justify-between px-3 sm:mx-9 pb-3">
-          <div className="flex items-center">
+          <div className="flex items-center p-2 hover:bg-blue-500 
+          hover:text-white hover:rounded-full cursor-pointer">
             <div className="w-7 h-7">
               <Image src={camera} />
             </div>
@@ -113,7 +114,8 @@ const CreatePost = () => {
           </div>
 
           <div
-            className="flex items-center"
+            className="flex items-center p-2 hover:bg-blue-500 
+          hover:text-white hover:rounded-full cursor-pointer"
             onClick={() => imageRef.current.click()}
           >
             <div className="w-7 h-7">
@@ -128,7 +130,8 @@ const CreatePost = () => {
             <p className="pl-2   text-[14px]">Photo/Video</p>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center p-2 hover:bg-blue-500 
+          hover:text-white hover:rounded-full cursor-pointer">
             <div className="w-7 h-7">
               <Image src={smile} />
             </div>
