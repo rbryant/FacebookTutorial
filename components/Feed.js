@@ -8,11 +8,12 @@ import Stories from "./Stories";
 const Feed = () => {
   return (
     <div className="flex h-screen bg-[#f2f3f7] ">
-      {/* LeftSidebar <LeftSidebar />*/}
+      {/* LeftSidebar */}
+      <LeftSidebar />
       
       <div className="mx-auto">
-        {/* Stories */}
-        <Stories />
+        {/* Stories 
+        <Stories />*/}
         {/* CreatePost */}
         <CreatePost />
         {/* Posts */}

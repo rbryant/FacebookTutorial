@@ -2,17 +2,19 @@
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBDj2pvOmWWfODBM1HFpJYFkK3ED3ZpdPw",
-  authDomain: "plead-9154f.firebaseapp.com",
-  projectId: "plead-9154f",
-  storageBucket: "plead-9154f.appspot.com",
-  messagingSenderId: "720417488893",
-  appId: "1:720417488893:web:d23000d290ecb09438e394"
+  apiKey: "AIzaSyD8t_2pFFr0r314WkxEtSjx9nPqz1nvkWc",
+  authDomain: "plead-be7d9.firebaseapp.com",
+  projectId: "plead-be7d9",
+  storageBucket: "plead-be7d9.firebasestorage.app",
+  messagingSenderId: "647865077085",
+  appId: "1:647865077085:web:ef091eda1253ba5681ecb4",
+  measurementId: "G-BZC2GM2WKB",
 };
 
 // Initialize Firebase
@@ -21,3 +23,4 @@ const db = getFirestore();
 const storage = getStorage();
 
 export { app, db, storage };
+

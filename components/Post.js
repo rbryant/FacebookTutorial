@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import ShareModal from "./modals/ShareModal";
 import guy from "../assets/guy7.jpg";
 import dots from "../assets/dots.png";
 import car from "../assets/c-class.jpg";
@@ -36,6 +36,7 @@ const Post = ({ id, username, userImg, caption, timestamp, img }) => {
   const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   //When Likes update in the db update the likes in the app as well
   useEffect(
@@ -91,6 +92,11 @@ const Post = ({ id, username, userImg, caption, timestamp, img }) => {
       image: session?.user?.image,
       timestamp: serverTimestamp(),
     });
+  };
+
+  // Share post function
+  const sharePost = () => {
+    setIsShareModalOpen(true);
   };
 
   return (
@@ -154,9 +160,9 @@ const Post = ({ id, username, userImg, caption, timestamp, img }) => {
           </div>
           <div className="flex items-center">
             <FaRegCommentAlt className="w-5 h-5" />
-            <p className="pl-2 text-[18px]">Comment</p>
+            <p className="pl-2 text-[18px]">Respond</p>
           </div>
-          <div className="flex items-center">
+          <div className="flex items-center" onClick={sharePost}>
             <div className="w-6 h-6">
               <Image src={share} />
             </div>
@@ -166,7 +172,6 @@ const Post = ({ id, username, userImg, caption, timestamp, img }) => {
         </div>
         <div className="border-b my-2"></div>
       </div>
-
       {/* Comment Section*/}
       <div className="max-h-60  overflow-y-auto  ">
         <div className="flex justify-between text-[#8e8d8d]  ">
@@ -224,6 +229,13 @@ const Post = ({ id, username, userImg, caption, timestamp, img }) => {
           </div>
         </div>
       </div>
+      {/* Share Modal */}{" "}
+      <ShareModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+        postId={id}
+        caption={caption}
+      />
     </div>
   );
 };

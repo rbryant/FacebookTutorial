@@ -74,7 +74,7 @@ const CreatePost = () => {
           <div className="flex items-center ml-5 w-full  ">
             <input
               type="text"
-              placeholder="What's on your mind Joe Doe?"
+              placeholder="What's on your heart?"
               className="outline-0 bg-[#f2f3f7] p-1 rounded-full pl-3 w-full h-12 truncate"
               ref={captionRef}
             />
@@ -85,7 +85,7 @@ const CreatePost = () => {
             onClick={uploadPost}
           >
             <button className="font-bold text-white">
-              {loading ? "Loading" : "Post"}
+              {loading ? "Loading" : "Plead"}
             </button>
           </div>
         </div>
@@ -104,6 +104,7 @@ const CreatePost = () => {
           className="
         border-b mb-4 mt-2"
         ></div>
+
         <div className="flex justify-between px-3 sm:mx-9 pb-3">
           <div className="flex items-center p-2 hover:bg-blue-500 
           hover:text-white hover:rounded-full cursor-pointer">
@@ -137,7 +138,7 @@ const CreatePost = () => {
             </div>
             <p className="pl-2   text-[14px]">Feeling/Activity</p>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );
