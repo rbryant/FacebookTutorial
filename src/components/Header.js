@@ -11,7 +11,10 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSessionContext } from "./context/SessionContext";
-  
+
+import { db } from "../../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+
 const Header = () => {
   const { session, status, loading } = useSessionContext();
   const router = useRouter();
@@ -19,6 +22,26 @@ const Header = () => {
   
   useEffect(() => {
     console.log("Session data:", session);
+        const saveUserToFirebase = async () => {
+          if (!session) return;
+
+          const { user } = session;
+          const googleUserId = session.user.uid;
+
+          const userDoc = doc(db, "users", googleUserId);
+          const userSnapshot = await getDoc(userDoc);
+
+          if (!userSnapshot.exists()) {
+            await setDoc(userDoc, {
+              userId: googleUserId,
+              userName: user.name,
+              email: user.email,
+              profilePicture: user.image,
+            });
+          }
+        };
+
+        saveUserToFirebase();
   }, [session]);
 
   useEffect(() => {

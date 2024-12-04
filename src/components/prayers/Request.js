@@ -31,7 +31,7 @@ import bluelike from "../../assets/25like.png";
 import blacklike from "../../assets/2unlike.png";
 import nouser from "../../assets/nouser.png";
 
-const Request = ({ id, username, userImg, caption, timestamp, img }) => {
+const Request = ({ id, username, userImg, content, timestamp, img }) => {
   const [hasLiked, setHasLiked] = useState(false);
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
@@ -125,7 +125,7 @@ const Request = ({ id, username, userImg, caption, timestamp, img }) => {
       </div>
       {/* Input */}
       <div className="my-3  ">
-        <p>{caption}</p>
+        <p>{content}</p>
       </div>
       {/* Image */}
       <div className="-mx-5">
@@ -235,7 +235,7 @@ const Request = ({ id, username, userImg, caption, timestamp, img }) => {
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
         postId={id}
-        caption={caption}
+        content={content}
       />
     </div>
   );

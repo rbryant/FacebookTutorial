@@ -17,7 +17,7 @@ const Timeline = () => {
   useEffect(() => {
     const loadRequests = async () => {
       if (session && session.user) {
-        const userId = session;
+        const userId = session.user.uid;
         console.log("userId is ", userId);
 
         const [friendsRequests, sharedRequests, groupRequests, userRequests] =
@@ -49,7 +49,7 @@ const Timeline = () => {
             username={request.username}
             userImg={request.profileImg}
             img={request.image}
-            caption={request.caption}
+            content={request.content}
             sharedby={request.sharedBy}
             timestamp={request.timestamp}
           />

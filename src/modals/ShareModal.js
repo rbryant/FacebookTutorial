@@ -6,11 +6,13 @@ import {
   where,
   onSnapshot,
   addDoc,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { BsXCircle } from "react-icons/bs";
 import { useSessionContext } from "../components/context/SessionContext";
 
-const ShareModal = ({ isOpen, onClose, postId, caption, userId }) => {
+const ShareModal = ({ isOpen, onClose, postId, content, userId }) => {
   const [friends, setFriends] = useState([]);
   const [selectedFriends, setSelectedFriends] = useState([]);
   const { session } = useSessionContext();
@@ -21,11 +23,24 @@ const ShareModal = ({ isOpen, onClose, postId, caption, userId }) => {
         collection(db, "friends"),
         where("user1", "==", session.user.uid)
       );
-      onSnapshot(q, (snapshot) => {
-        setFriends(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      onSnapshot(q, async (snapshot) => {
+        const friendsData = await Promise.all(
+          snapshot.docs.map(async (docSnapshot) => {
+            const friendId = docSnapshot.data().user2;
+            const friendDoc = await getDoc(doc(db, "users", friendId));
+            if (friendDoc.exists()) {
+              const friendData = friendDoc.data();
+              return { id: friendId, name: friendData.userName };
+            } else {
+              console.error(`No user found for ID: ${friendId}`);
+              return null;
+            }
+          })
+        );
+        setFriends(friendsData.filter((friend) => friend !== null));
       });
     }
-  }, [isOpen, userId]);
+  }, [isOpen, userId, session.user.uid]);
 
   const handleShare = async () => {
     try {
@@ -33,13 +48,15 @@ const ShareModal = ({ isOpen, onClose, postId, caption, userId }) => {
       console.log("Shared with:", selectedFriends);
       // Example: Add a shared post to each selected friend's collection
       selectedFriends.forEach(async (friendId) => {
-        await addDoc(collection(db, "sharedPosts"), {
-          postId,
+        await addDoc(collection(db, "sharedRequests"), {
+          requestId: postId,
           friendId,
           sharedBy: session.user.uid,
           timestamp: new Date(),
         });
       });
+      // Reset selected friends list
+      setSelectedFriends([]);
       onClose();
     } catch (error) {
       console.error("Error sharing post:", error);
@@ -64,7 +81,7 @@ const ShareModal = ({ isOpen, onClose, postId, caption, userId }) => {
             className="float-right h-5 w-5 close-icon"
           />
         </div>
-        <p>{caption}</p>
+        <p>{content}</p>
 
         <div className="friend-list">
           {friends.map((friend) => (
@@ -75,7 +92,7 @@ const ShareModal = ({ isOpen, onClose, postId, caption, userId }) => {
                 onChange={() => handleSelectFriend(friend.id)}
                 checked={selectedFriends.includes(friend.id)}
               />
-              <label>{friend.user2}</label>
+              <label>{friend.name}</label>
             </div>
           ))}
         </div>

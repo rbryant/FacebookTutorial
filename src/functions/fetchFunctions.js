@@ -79,7 +79,7 @@ export const fetchUserRequests = async (userId) => {
   console.log("in fetchUserRequests");
   const userRequestsQuery = query(
     collection(db, "prayerRequests"),
-    where("uid", "==", userId)
+    where("userId", "==", userId)
   );
   const userRequestsSnapshot = await getDocs(userRequestsQuery);
   return userRequestsSnapshot.docs.map((doc) => ({
